@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sonia Sierra</title>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2FMJHH6KMX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2FMJHH6KMX');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Variables ─────────────────────────────────── */
+    :root {
+      --cream:   #FFFEF9;
+      --dark:    #1A1433;
+      --gray:    #6B7280;
+      --light:   #F5F0FF;
+      --white:   #FFFFFF;
+      --yellow:  #FFD93D;
+      --coral:   #FF6B6B;
+      --teal:    #3DD6C0;
+      --blue:    #44A8F2;
+      --purple:  #8B5CF6;
+      --green:   #52C97F;
+      --orange:  #FF8C42;
+      --pink:    #FF4F7B;
+      --serif:   'DM Serif Display', serif;
+      --sans:    'DM Sans', sans-serif;
+      --max:     1240px;
+    }
+
+    /* ── Reset ─────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ── Utilities ──────────────────────────────────── */
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 2rem; }
+    .label {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--purple); display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 0.9rem;
+    }
+    .label::before {
+      content: ''; width: 24px; height: 2px;
+      background: var(--purple); display: inline-block;
+    }
+    .h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      line-height: 1.15;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.8rem 1.6rem; border-radius: 100px;
+      font-weight: 600; font-size: 0.88rem;
+      transition: all 0.25s; cursor: pointer; border: none;
+    }
+    .btn-dark { background: var(--dark); color: var(--cream); }
+    .btn-dark:hover { background: var(--purple); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--dark); border: 2px solid rgba(26,20,51,0.25); }
+    .btn-outline:hover { border-color: var(--purple); color: var(--purple); transform: translateY(-2px); }
+
+    /* scroll-offset for fixed nav */
+    section[id], div[id] { scroll-margin-top: 80px; }
+
+    /* ── Fade-in ────────────────────────────────────── */
+    .fi { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fi.on { opacity: 1; transform: translateY(0); }
+    .fi:nth-child(2) { transition-delay: 0.1s; }
+    .fi:nth-child(3) { transition-delay: 0.2s; }
+    .fi:nth-child(4) { transition-delay: 0.3s; }
+    .fi:nth-child(5) { transition-delay: 0.4s; }
+
+    /* ═══════════════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════════════ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      padding: 1.4rem 2rem; transition: all 0.3s;
+    }
+    .nav.stuck {
+      background: rgba(255,254,249,0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 0.9rem 2rem;
+      box-shadow: 0 1px 24px rgba(26,20,51,0.07);
+    }
+    .nav-row {
+      max-width: var(--max); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--sans); font-size: 1.05rem; font-weight: 700; color: var(--dark);
+    }
+    .nav-logo span { color: var(--purple); }
+    .nav-links { display: flex; align-items: center; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-size: 0.875rem; font-weight: 500; color: var(--dark); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--purple); }
+    .nav-links .cta {
+      background: var(--dark); color: var(--cream);
+      padding: 0.55rem 1.3rem; border-radius: 100px;
+      font-size: 0.8rem; font-weight: 600; transition: background 0.2s;
+    }
+    .nav-links .cta:hover { background: var(--purple); color: var(--cream); }
+
+    /* ═══════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════ */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 7rem 2rem 5rem; position: relative; overflow: hidden;
+    }
+    .hero-grid {
+      max-width: var(--max); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: center; width: 100%;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(139,92,246,0.1); color: var(--purple);
+      padding: 0.35rem 0.9rem; border-radius: 100px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .hero-tag::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--purple); border-radius: 50%;
+    }
+    .hero-h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      line-height: 1.08; margin-bottom: 1.4rem;
+    }
+    .hero-h1 em { font-style: italic; color: var(--purple); }
+    .hero-sub {
+      font-size: 1.1rem; color: var(--gray);
+      max-width: 460px; line-height: 1.75; margin-bottom: 2.4rem;
+    }
+    .hero-btns { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+    .hero-stats {
+      display: flex; gap: 2rem; margin-top: 3rem;
+      padding-top: 2rem; border-top: 1px solid rgba(26,20,51,0.08);
+    }
+    .hero-stat-n {
+      font-family: var(--serif); font-size: 2rem; color: var(--dark); line-height: 1;
+    }
+    .hero-stat-l { font-size: 0.78rem; color: var(--gray); margin-top: 0.2rem; }
+
+    /* Hero art */
+    .hero-art {
+      position: relative; height: 500px;
+    }
+    .blob {
+      position: absolute; border-radius: 50%;
+    }
+    .b1 {
+      width: 300px; height: 300px;
+      background: rgba(139,92,246,0.12);
+      top: 10px; right: 0;
+      border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+      animation: morph1 9s ease-in-out infinite;
+    }
+    .b2 {
+      width: 210px; height: 210px;
+      background: rgba(68,168,242,0.18);
+      bottom: 50px; right: 80px;
+      border-radius: 40% 60% 30% 70% / 60% 40% 70% 30%;
+      animation: morph2 11s ease-in-out infinite;
+    }
+    .b3 {
+      width: 160px; height: 160px;
+      background: rgba(255,217,61,0.3);
+      top: 130px; left: 20px;
+      border-radius: 70% 30% 50% 50% / 30% 70% 30% 70%;
+      animation: morph3 7s ease-in-out infinite;
+    }
+    .b4 {
+      width: 100px; height: 100px;
+      background: rgba(255,107,107,0.22);
+      bottom: 60px; left: 60px; border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+    .b5 {
+      width: 72px; height: 72px;
+      background: rgba(82,201,127,0.28);
+      top: 55px; left: 140px; border-radius: 50%;
+      animation: float 5s ease-in-out infinite 1.3s;
+    }
+    .hcard {
+      position: absolute; background: var(--white);
+      border-radius: 16px; padding: 1rem 1.2rem;
+      box-shadow: 0 8px 36px rgba(26,20,51,0.1); z-index: 3;
+    }
+    .hcard-emoji { font-size: 1.7rem; margin-bottom: 0.2rem; }
+    .hcard-l { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--gray); }
+    .hcard-v { font-family: var(--serif); font-size: 0.92rem; color: var(--dark); }
+    .hc1 { top: 30px; left: 0; animation: float 7s ease-in-out infinite; }
+    .hc2 { bottom: 70px; right: 10px; animation: float 9s ease-in-out infinite 2s; }
+    .hc3 { top: 210px; right: 5px; animation: float 8s ease-in-out infinite 1s; }
+
+    /* Decorative bg rings */
+    .hero::before, .hero::after {
+      content: ''; position: absolute; border-radius: 50%;
+      background: var(--dark); opacity: 0.035; pointer-events: none;
+    }
+    .hero::before { width: 640px; height: 640px; top: -220px; right: -120px; }
+    .hero::after  { width: 420px; height: 420px; bottom: -160px; left: -80px; }
+
+    /* ═══════════════════════════════════════════════════
+       MISSION BAND
+    ═══════════════════════════════════════════════════ */
+    .mission {
+      background: var(--dark); padding: 5rem 2rem; text-align: center;
+    }
+    .mission-q {
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(1.45rem, 3vw, 2.1rem); line-height: 1.45;
+      color: var(--cream); max-width: 780px; margin: 0 auto 1.25rem;
+    }
+    .mission-q em { font-style: normal; color: var(--yellow); }
+    .mission-by { font-size: 0.82rem; color: rgba(255,254,249,0.45); letter-spacing: 0.06em; }
+
+    /* ═══════════════════════════════════════════════════
+       ABOUT
+    ═══════════════════════════════════════════════════ */
+    .about { padding: 6rem 2rem; }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: start;
+    }
+    .about-bio { font-size: 1.02rem; color: var(--gray); line-height: 1.8; margin-bottom: 1.3rem; }
+    .highlight {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1.1rem 1.25rem; background: var(--light);
+      border-radius: 14px; margin-bottom: 0.9rem;
+    }
+    .highlight-ico { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .highlight-t { font-size: 0.88rem; color: var(--dark); line-height: 1.55; }
+    .highlight-t strong { display: block; font-weight: 700; margin-bottom: 0.15rem; }
+
+    /* Photo */
+    .about-photo {
+      border-radius: 20px; overflow: hidden; margin-bottom: 1.5rem;
+      box-shadow: 0 8px 40px rgba(26,20,51,0.12);
+      aspect-ratio: 4 / 5; width: 60%;
+    }
+    .about-photo img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center top;
+      display: block;
+    }
+
+    /* Credentials card */
+    .creds {
+      background: var(--white); border-radius: 24px;
+      padding: 2.25rem; box-shadow: 0 4px 40px rgba(26,20,51,0.08);
+    }
+    .creds-title { font-family: var(--serif); font-size: 1.2rem; margin-bottom: 1.75rem; }
+    .cred {
+      display: flex; gap: 0.9rem; padding: 1.1rem 0;
+      border-bottom: 1px solid rgba(26,20,51,0.06); align-items: flex-start;
+    }
+    .cred:last-of-type { border-bottom: none; }
+    .badge {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .badge-b { background: rgba(68,168,242,0.14); }
+    .badge-g { background: rgba(82,201,127,0.14); }
+    .badge-p { background: rgba(139,92,246,0.14); }
+    .badge-o { background: rgba(255,140,66,0.14); }
+    .cred-deg { font-weight: 700; font-size: 0.88rem; color: var(--dark); margin-bottom: 0.15rem; }
+    .cred-sch { font-size: 0.78rem; color: var(--gray); }
+    .exp-row {
+      display: flex; gap: 1.25rem; margin-top: 1.75rem;
+      padding-top: 1.75rem; border-top: 1px solid rgba(26,20,51,0.06);
+    }
+    .exp-item { text-align: center; flex: 1; }
+    .exp-n { font-family: var(--serif); font-size: 1.85rem; color: var(--purple); line-height: 1; }
+    .exp-l { font-size: 0.72rem; color: var(--gray); margin-top: 0.2rem; line-height: 1.35; }
+
+    /* ═══════════════════════════════════════════════════
+       APPROACH
+    ═══════════════════════════════════════════════════ */
+    .approach { background: var(--light); padding: 6rem 2rem; }
+    .approach-inner { max-width: var(--max); margin: 0 auto; }
+    .approach-hd { max-width: 580px; margin-bottom: 3.5rem; }
+    .approach-hd p { color: var(--gray); font-size: 1rem; line-height: 1.75; margin-top: 0.9rem; }
+    .approach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+    .acard {
+      background: var(--white); border-radius: 20px; padding: 2rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .acard:hover { transform: translateY(-6px); box-shadow: 0 14px 44px rgba(26,20,51,0.11); }
+    .acard:nth-child(2) { transform: rotate(-1deg); }
+    .acard:nth-child(2):hover { transform: rotate(0deg) translateY(-6px); box-shadow: 0 14px 44px rgba(26,20,51,0.11); }
+    .acard-ico { font-size: 2rem; margin-bottom: 1.1rem; display: block; }
+    .acard-title { font-family: var(--serif); font-size: 1.2rem; margin-bottom: 0.65rem; }
+    .acard-text { font-size: 0.875rem; color: var(--gray); line-height: 1.7; }
+    .acard-tag {
+      display: inline-block; margin-top: 1.2rem;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 0.28rem 0.75rem; border-radius: 100px;
+    }
+    .tag-y { background: rgba(255,217,61,0.2); color: #92620A; }
+    .tag-p { background: rgba(139,92,246,0.15); color: var(--purple); }
+    .tag-t { background: rgba(61,214,192,0.18); color: #0A7A6E; }
+
+    /* ═══════════════════════════════════════════════════
+       INSPIRED BY STRIP
+    ═══════════════════════════════════════════════════ */
+    .inspired { padding: 2.5rem 2rem; background: var(--cream); border-top: 1px solid rgba(26,20,51,0.07); border-bottom: 1px solid rgba(26,20,51,0.07); }
+    .inspired-row {
+      max-width: var(--max); margin: 0 auto;
+      display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .inspired-text { font-size: 0.85rem; color: var(--gray); }
+    .inspired-text strong { color: var(--dark); }
+    .inspired-links { display: flex; gap: 1.5rem; margin-left: auto; flex-wrap: wrap; }
+    .inspired-a {
+      font-size: 0.78rem; font-weight: 700; color: var(--gray);
+      border-bottom: 2px solid transparent; padding-bottom: 0.1rem; transition: all 0.2s;
+    }
+    .inspired-a:hover { color: var(--purple); border-color: var(--purple); }
+
+    /* ═══════════════════════════════════════════════════
+       5 BIG IDEAS
+    ═══════════════════════════════════════════════════ */
+    .big-ideas { padding: 6rem 2rem; }
+    .bi-inner { max-width: var(--max); margin: 0 auto; }
+    .bi-hd { text-align: center; max-width: 600px; margin: 0 auto 3.5rem; }
+    .bi-hd p { color: var(--gray); font-size: 1rem; line-height: 1.75; margin-top: 0.9rem; }
+    .bi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2rem; }
+    .icard {
+      border-radius: 20px; padding: 1.75rem 1.4rem;
+      transition: transform 0.3s, box-shadow 0.3s; cursor: default;
+    }
+    .icard:hover { transform: translateY(-7px); box-shadow: 0 18px 50px rgba(0,0,0,0.11); }
+    .icard-num {
+      font-family: var(--serif); font-style: italic;
+      font-size: 3rem; line-height: 1; margin-bottom: 0.9rem; opacity: 0.2;
+    }
+    .icard-ico { font-size: 1.9rem; display: block; margin-bottom: 0.85rem; }
+    .icard-title { font-family: var(--serif); font-size: 1.05rem; line-height: 1.25; margin-bottom: 0.65rem; }
+    .icard-desc { font-size: 0.8rem; line-height: 1.65; opacity: 0.72; }
+    .icard-act {
+      margin-top: 1.4rem; padding-top: 0.9rem;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; opacity: 0.55;
+    }
+    .ic1 { background: rgba(68,168,242,0.1);  color: #0A4F8A; border: 1px solid rgba(68,168,242,0.2); }
+    .ic2 { background: rgba(139,92,246,0.1); color: #4A1D96; border: 1px solid rgba(139,92,246,0.2); }
+    .ic3 { background: rgba(82,201,127,0.1);  color: #065F46; border: 1px solid rgba(82,201,127,0.2); }
+    .ic4 { background: rgba(255,140,66,0.1);  color: #7C2D12; border: 1px solid rgba(255,140,66,0.2); }
+    .ic5 { background: rgba(255,79,123,0.1);  color: #831843; border: 1px solid rgba(255,79,123,0.2); }
+
+    /* ═══════════════════════════════════════════════════
+       ACTIVITIES
+    ═══════════════════════════════════════════════════ */
+    .activities { padding: 6rem 2rem; background: var(--dark); }
+    .act-inner { max-width: var(--max); margin: 0 auto; }
+    .act-hd {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; margin-bottom: 2.75rem; flex-wrap: wrap; gap: 1.5rem;
+    }
+    .act-hd .label { color: rgba(255,217,61,0.85); }
+    .act-hd .label::before { background: rgba(255,217,61,0.85); }
+    .act-hd .h2 { color: var(--cream); }
+    .act-note { font-size: 0.82rem; color: rgba(255,254,249,0.45); max-width: 230px; text-align: right; }
+    .act-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; grid-auto-flow: dense; }
+    .ac {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 20px; padding: 2rem;
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .ac:hover { background: rgba(255,255,255,0.09); transform: translateY(-4px); }
+    .ac-wide { grid-column: span 2; }
+    .ac-soon {
+      position: absolute; top: 1.25rem; right: 1.25rem;
+      background: var(--yellow); color: var(--dark);
+      font-size: 0.62rem; font-weight: 800; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 0.22rem 0.6rem; border-radius: 100px;
+    }
+    .ac-itag {
+      display: inline-block; font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.22rem 0.7rem; border-radius: 100px; margin-bottom: 1.1rem;
+    }
+    .ac-title { font-family: var(--serif); font-size: 1.3rem; color: var(--cream); margin-bottom: 0.65rem; }
+    .ac-desc { font-size: 0.85rem; color: rgba(255,254,249,0.58); line-height: 1.7; }
+    .ac-skill { margin-top: 1.4rem; font-size: 0.72rem; color: rgba(255,254,249,0.4); }
+    .ac-skill strong { color: rgba(255,254,249,0.68); font-weight: 600; }
+
+    /* activity tag colours (dark-bg variants) */
+    .at-blue   { background: rgba(68,168,242,0.22);  color: #93C5FD; }
+    .at-purple { background: rgba(139,92,246,0.22); color: #C4B5FD; }
+    .at-green  { background: rgba(82,201,127,0.22);  color: #86EFAC; }
+    .at-orange { background: rgba(255,140,66,0.22);  color: #FCA974; }
+    .at-pink   { background: rgba(255,79,123,0.22);  color: #FDA4AF; }
+
+    /* ═══════════════════════════════════════════════════
+       FOR PARENTS
+    ═══════════════════════════════════════════════════ */
+    .parents { padding: 6rem 2rem; }
+    .parents-grid {
+      max-width: var(--max); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+    .parents-visual { position: relative; }
+    .parents-bg-n {
+      font-family: var(--serif); font-style: italic;
+      font-size: 11rem; color: rgba(139,92,246,0.07);
+      line-height: 1; position: absolute; top: -2rem; left: -1.5rem;
+      pointer-events: none; user-select: none;
+    }
+    .qcard {
+      background: var(--white); border-radius: 18px; padding: 1.75rem;
+      box-shadow: 0 6px 28px rgba(26,20,51,0.08); margin-bottom: 0.85rem; position: relative; z-index: 1;
+    }
+    .qcard:nth-child(2) { transform: rotate(1.5deg); margin-left: 1.25rem; }
+    .qcard:nth-child(3) { transform: rotate(-1deg); margin-right: 1.25rem; }
+    .parents-quotes-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--purple);
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 1.25rem; position: relative; z-index: 1;
+    }
+    .parents-quotes-label::before {
+      content: ''; width: 24px; height: 2px;
+      background: var(--purple); display: inline-block; flex-shrink: 0;
+    }
+    .qcard-ico { font-size: 1.4rem; margin-bottom: 0.6rem; }
+    .qcard-text { font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--dark); line-height: 1.5; }
+    .qcard-attr { display: block; font-family: var(--sans); font-style: normal; font-size: 0.72rem; color: var(--gray); margin-top: 0.6rem; }
+    .parents-copy p { color: var(--gray); font-size: 1rem; line-height: 1.75; margin-bottom: 1.75rem; }
+    .benefits { list-style: none; }
+    .benefits li {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 0.95rem 0; border-bottom: 1px solid rgba(26,20,51,0.06);
+      font-size: 0.9rem;
+    }
+    .benefits li:last-child { border-bottom: none; }
+    .ben-ico { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .ben-text { color: var(--gray); line-height: 1.55; }
+    .ben-text strong { display: block; color: var(--dark); font-weight: 700; margin-bottom: 0.15rem; }
+
+    /* ═══════════════════════════════════════════════════
+       CTA
+    ═══════════════════════════════════════════════════ */
+    .cta { background: var(--light); padding: 6rem 2rem; text-align: center; }
+    .cta-inner { max-width: 560px; margin: 0 auto; }
+    .cta-emoji { font-size: 2.75rem; display: block; margin-bottom: 1.25rem; }
+    .cta-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 2.9rem); margin-bottom: 0.9rem; }
+    .cta-sub { font-size: 1rem; color: var(--gray); line-height: 1.75; margin-bottom: 2.25rem; }
+    .cta-form { display: flex; gap: 0.7rem; max-width: 460px; margin: 0 auto 1.25rem; }
+    .cta-input {
+      flex: 1; padding: 0.82rem 1.2rem;
+      border: 2px solid rgba(26,20,51,0.1); border-radius: 100px;
+      font-family: var(--sans); font-size: 0.88rem; background: var(--white); outline: none;
+      transition: border-color 0.2s;
+    }
+    .cta-input:focus { border-color: var(--purple); }
+    .cta-privacy { font-size: 0.72rem; color: var(--gray); }
+
+    /* ═══════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════ */
+    .footer { background: var(--dark); padding: 3.5rem 2rem 2rem; }
+    .footer-row {
+      max-width: var(--max); margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      flex-wrap: wrap; gap: 2.5rem; padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255,254,249,0.08);
+    }
+    .footer-brand { font-family: var(--serif); font-size: 1.2rem; color: var(--cream); margin-bottom: 0.5rem; }
+    .footer-brand span { color: var(--yellow); }
+    .footer-mission { font-size: 0.82rem; color: rgba(255,254,249,0.45); max-width: 280px; line-height: 1.7; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-links a { font-size: 0.8rem; color: rgba(255,254,249,0.45); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--cream); }
+    .footer-copy {
+      max-width: var(--max); margin: 0 auto;
+      padding-top: 1.75rem; text-align: center;
+      font-size: 0.72rem; color: rgba(255,254,249,0.3);
+    }
+    .footer-copy a { color: rgba(255,254,249,0.3); transition: color 0.2s; }
+    .footer-copy a:hover { color: rgba(255,254,249,0.6); }
+
+    /* ═══════════════════════════════════════════════════
+       ANIMATIONS
+    ═══════════════════════════════════════════════════ */
+    @keyframes morph1 {
+      0%,100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
+      50%      { border-radius: 30% 70% 40% 60% / 70% 30% 60% 40%; }
+    }
+    @keyframes morph2 {
+      0%,100% { border-radius: 40% 60% 30% 70% / 60% 40% 70% 30%; }
+      50%      { border-radius: 70% 30% 60% 40% / 30% 70% 40% 60%; }
+    }
+    @keyframes morph3 {
+      0%,100% { border-radius: 70% 30% 50% 50% / 30% 70% 30% 70%; }
+      50%      { border-radius: 50% 50% 70% 30% / 70% 30% 70% 30%; }
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-13px); }
+    }
+
+    /* ═══════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════ */
+    @media (max-width: 1080px) {
+      .bi-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .hero-grid, .about-grid, .parents-grid { grid-template-columns: 1fr; }
+      .hero-art { height: 320px; }
+      .approach-grid { grid-template-columns: repeat(2, 1fr); }
+      .acard:nth-child(2) { transform: none; }
+      .bi-grid { grid-template-columns: repeat(2, 1fr); }
+      .act-grid { grid-template-columns: 1fr; }
+      .ac-wide { grid-column: span 1; }
+      .act-note { text-align: left; }
+      .cta-form { flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .approach-grid { grid-template-columns: 1fr; }
+      .bi-grid { grid-template-columns: 1fr 1fr; }
+      .hero-stats { gap: 1.2rem; }
+    }
+
+    /* ── Language Toggle ─────────────────────────── */
+    .lang-toggle {
+      display: flex; align-items: center;
+      background: rgba(26,20,51,0.07); border-radius: 100px;
+      padding: 3px; gap: 2px; margin-left: 0.75rem; flex-shrink: 0;
+    }
+    .lang-btn {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.07em;
+      padding: 0.28rem 0.6rem; border-radius: 100px;
+      border: none; cursor: pointer; background: transparent;
+      color: var(--gray); transition: all 0.2s;
+      font-family: var(--sans); line-height: 1;
+    }
+    .lang-btn.active { background: var(--dark); color: var(--cream); }
+    .lang-btn:hover:not(.active) { color: var(--dark); }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-row">
+    <a href="https://soniasierra.com/" target="_blank" rel="noopener" class="nav-logo">Sonia Sierra</a>
+    <ul class="nav-links">
+      <li><a href="#about" data-i18n="nav_about">About</a></li>
+      <li><a href="#approach" data-i18n="nav_approach">Approach</a></li>
+      <li><a href="#big-ideas" data-i18n="nav_bigideas">Big Ideas</a></li>
+      <li><a href="#activities" data-i18n="nav_activities">Explorations</a></li>
+      <li><a href="#parents" data-i18n="nav_parents">For Families</a></li>
+      <li><a href="#contact" class="cta" data-i18n="nav_cta">Let's Connect</a></li>
+    </ul>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="es" onclick="setLang('es')">ES</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" id="home">
+  <div class="hero-grid">
+
+    <div class="hero-content">
+      <div class="hero-tag" data-i18n="hero_tag">Art × AI Education</div>
+      <h1 class="hero-h1" data-i18n="hero_h1">
+        Where <em>creativity</em> meets the future of AI literacy
+      </h1>
+      <p class="hero-sub" data-i18n="hero_sub">
+        Helping parents and children explore artificial intelligence through art, play, and critical thinking — building the human skills no algorithm can replace.
+      </p>
+      <div class="hero-btns">
+        <a href="#big-ideas" class="btn btn-dark" data-i18n="hero_btn1">Explore the 5 Big Ideas ↓</a>
+        <a href="#about" class="btn btn-outline" data-i18n="hero_btn2">About Me</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-n">15+</div>
+          <div class="hero-stat-l" data-i18n="hero_stat1_l">Years in design</div>
+        </div>
+        <div>
+          <div class="hero-stat-n">7</div>
+          <div class="hero-stat-l" data-i18n="hero_stat2_l">Years in AI &amp; data</div>
+        </div>
+        <div>
+          <div class="hero-stat-n">4</div>
+          <div class="hero-stat-l" data-i18n="hero_stat3_l">Advanced degrees</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="blob b3"></div>
+      <div class="blob b4"></div>
+      <div class="blob b5"></div>
+      <div class="hcard hc1">
+        <div class="hcard-emoji">🎨</div>
+        <div class="hcard-l" data-i18n="hc1_label">Workshop Focus</div>
+        <div class="hcard-v" data-i18n="hc1_val">Creative Problem Solving</div>
+      </div>
+      <div class="hcard hc2">
+        <div class="hcard-emoji">🤖</div>
+        <div class="hcard-l" data-i18n="hc2_label">Big Idea 5</div>
+        <div class="hcard-v" data-i18n="hc2_val">AI + Societal Impact</div>
+      </div>
+      <div class="hcard hc3">
+        <div class="hcard-emoji">✨</div>
+        <div class="hcard-l" data-i18n="hc3_label">Ages</div>
+        <div class="hcard-v" data-i18n="hc3_val">6 – 12 Years</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ MISSION BAND ═══════════ -->
+<div class="mission">
+  <div class="wrap">
+    <p class="mission-q" data-i18n="mission_q">
+      "I don't know what skills children will need in 10 years — but I know they'll need to be
+      <em>adaptable, creative, and deeply human</em> in how they think about the world AI is building."
+    </p>
+    <p class="mission-by" data-i18n="mission_by">— Sonia Sierra, Designer &amp; Educator</p>
+  </div>
+</div>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section class="about" id="about">
+  <div class="wrap"><div class="about-grid">
+
+    <div>
+      <div class="label" data-i18n="about_label">About Me</div>
+      <h2 class="h2" style="margin-bottom:1.4rem;" data-i18n="about_h2">Designing human experiences<br>for an AI world</h2>
+      <p class="about-bio" data-i18n="about_bio1">
+        I'm a designer with 15 years of experience making complex ideas feel human. For the past 7 years I've focused on AI and data experiences at companies like Capital One — translating cutting-edge technology into products people actually understand and trust.
+      </p>
+      <p class="about-bio" data-i18n="about_bio2">
+        But my deepest work has always been about people. The children growing up today will inherit a world shaped by AI — and they deserve to grow up understanding it, questioning it, and shaping it themselves.
+      </p>
+      <p class="about-bio" data-i18n="about_bio3">
+        I combine my design expertise with my background in arts education to create workshops where creativity is the gateway to AI literacy, ethical reasoning, and future-ready thinking.
+      </p>
+
+      <div class="highlight">
+        <span class="highlight-ico">🔭</span>
+        <div class="highlight-t" data-i18n="hl1_t">
+          <strong>Futures Thinking &amp; Strategic Foresight</strong>
+          I apply methodologies from strategic foresight to teaching — helping kids explore not just what AI is today, but what it could mean for all of us tomorrow.
+        </div>
+      </div>
+
+      <div class="highlight">
+        <span class="highlight-ico">🌱</span>
+        <div class="highlight-t" data-i18n="hl2_t">
+          <strong>MIT pK-12 Inspired Curriculum</strong>
+          My approach draws from MIT's initiative to empower the next generation — pairing every technical concept with a core human skill, so children grow as thinkers and makers.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="about-photo">
+        <img src="./sonia-headshot.jpg" alt="Sonia Sierra — designer and educator">
+      </div>
+      <div class="creds">
+        <h3 class="creds-title" data-i18n="creds_title">Education &amp; Credentials</h3>
+
+        <div class="cred">
+          <div class="badge badge-o">🎓</div>
+          <div>
+            <div class="cred-deg" data-i18n="cred1_deg">MBA — Design Strategy</div>
+            <div class="cred-sch" data-i18n="cred1_sch">California College of the Arts</div>
+          </div>
+        </div>
+
+        <div class="cred">
+          <div class="badge badge-p">🎓</div>
+          <div>
+            <div class="cred-deg" data-i18n="cred2_deg">MFA — Interdisciplinary Arts Education</div>
+            <div class="cred-sch" data-i18n="cred2_sch">University of Barcelona</div>
+          </div>
+        </div>
+
+        <div class="cred">
+          <div class="badge badge-b">🎓</div>
+          <div>
+            <div class="cred-deg" data-i18n="cred3_deg">Bachelor of Fine Arts</div>
+            <div class="cred-sch" data-i18n="cred3_sch">University of Barcelona</div>
+          </div>
+        </div>
+
+        <div class="cred">
+          <div class="badge badge-g">📚</div>
+          <div>
+            <div class="cred-deg" data-i18n="cred4_deg">Teaching Certificate — Experimental Arts &amp; Visual Education</div>
+            <div class="cred-sch" data-i18n="cred4_sch">Certified Educator</div>
+          </div>
+        </div>
+
+        <div class="exp-row">
+          <div class="exp-item">
+            <div class="exp-n">15+</div>
+            <div class="exp-l" data-i18n="exp1_l">Years in Design</div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-n">7</div>
+            <div class="exp-l" data-i18n="exp2_l">Years AI &amp; Data</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div></div>
+</section>
+
+<!-- ═══════════ APPROACH ═══════════ -->
+<section class="approach" id="approach">
+  <div class="approach-inner">
+    <div class="approach-hd">
+      <div class="label" data-i18n="approach_label">My Approach</div>
+      <h2 class="h2" data-i18n="approach_h2">Human skills first.<br>Technology second.</h2>
+      <p data-i18n="approach_p">For every technical AI concept we explore, we anchor it in a core human ability — because the most powerful intelligence will always be deeply, irreducibly human.</p>
+    </div>
+
+    <div class="approach-grid">
+      <div class="acard fi">
+        <span class="acard-ico">🔮</span>
+        <h3 class="acard-title" data-i18n="acard1_title">Futures Thinking</h3>
+        <p class="acard-text" data-i18n="acard1_text">Kids learn to imagine multiple possible futures, question assumptions, and understand how today's technology shapes tomorrow's world. Rooted in strategic foresight methodologies.</p>
+        <span class="acard-tag tag-y" data-i18n="acard1_tag">Strategic Foresight</span>
+      </div>
+      <div class="acard fi">
+        <span class="acard-ico">🎨</span>
+        <h3 class="acard-title" data-i18n="acard2_title">Art as a Thinking Tool</h3>
+        <p class="acard-text" data-i18n="acard2_text">Drawing, making, and creating aren't just fun — they're how children externalize complex thinking. Art becomes a medium for exploring how AI perceives, reasons, and learns.</p>
+        <span class="acard-tag tag-p" data-i18n="acard2_tag">Creative Pedagogy</span>
+      </div>
+      <div class="acard fi">
+        <span class="acard-ico">⚖️</span>
+        <h3 class="acard-title" data-i18n="acard3_title">Ethics from the Start</h3>
+        <p class="acard-text" data-i18n="acard3_text">We don't bolt ethics on at the end — it's woven into everything. Children discover ethical design principles by grappling with real questions about fairness, bias, and impact.</p>
+        <span class="acard-tag tag-t" data-i18n="acard3_tag">Ethical Design</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ INSPIRED BY ═══════════ -->
+<div class="inspired">
+  <div class="inspired-row">
+    <p class="inspired-text" data-i18n="inspired_text"><strong>Inspired by leading AI education initiatives:</strong></p>
+    <div class="inspired-links">
+      <a href="https://pk12.mit.edu/" target="_blank" class="inspired-a">MIT pK-12 Initiative ↗</a>
+      <a href="https://ai4k12.org/" target="_blank" class="inspired-a">AI4K12 ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ 5 BIG IDEAS ═══════════ -->
+<section class="big-ideas" id="big-ideas">
+  <div class="bi-inner">
+    <div class="bi-hd">
+      <div class="label" style="justify-content:center;" data-i18n="bi_label">The Framework</div>
+      <h2 class="h2" data-i18n="bi_h2">The 5 Big Ideas in AI</h2>
+      <p data-i18n="bi_p">Drawn from the <a href="https://ai4k12.org/" target="_blank" style="color:var(--purple);font-weight:600;">AI4K12 initiative</a>, these five ideas form the backbone of every workshop — each opening a door to both technical understanding and human wisdom.</p>
+    </div>
+
+    <div class="bi-grid">
+      <div class="icard ic1 fi">
+        <div class="icard-num">01</div>
+        <span class="icard-ico">👁️</span>
+        <h3 class="icard-title" data-i18n="ic1_title">Perception</h3>
+        <p class="icard-desc" data-i18n="ic1_desc">How do computers sense and understand the world? Cameras, microphones, sensors — and why machines often "see" very differently than humans do.</p>
+        <div class="icard-act" data-i18n="ic1_act">→ Activity: AI Portrait Lab</div>
+      </div>
+
+      <div class="icard ic2 fi">
+        <div class="icard-num">02</div>
+        <span class="icard-ico">🧠</span>
+        <h3 class="icard-title" data-i18n="ic2_title">Representation &amp; Reasoning</h3>
+        <p class="icard-desc" data-i18n="ic2_desc">How do machines represent knowledge and make decisions? We explore logic, data structures, and the surprising ways computers "think."</p>
+        <div class="icard-act" data-i18n="ic2_act">→ Activity: Story Maps</div>
+      </div>
+
+      <div class="icard ic3 fi">
+        <div class="icard-num">03</div>
+        <span class="icard-ico">📈</span>
+        <h3 class="icard-title" data-i18n="ic3_title">Learning</h3>
+        <p class="icard-desc" data-i18n="ic3_desc">Computers can learn from experience — but only from the data we give them. What does it mean to teach a machine? What can go wrong?</p>
+        <div class="icard-act" data-i18n="ic3_act">→ Activity: Pattern Gardens</div>
+      </div>
+
+      <div class="icard ic4 fi">
+        <div class="icard-num">04</div>
+        <span class="icard-ico">💬</span>
+        <h3 class="icard-title" data-i18n="ic4_title">Natural Interaction</h3>
+        <p class="icard-desc" data-i18n="ic4_desc">How do we communicate with computers through voice, gesture, and language? And what gets lost in translation between humans and machines?</p>
+        <div class="icard-act" data-i18n="ic4_act">→ Activity: Robot Theater</div>
+      </div>
+
+      <div class="icard ic5 fi">
+        <div class="icard-num">05</div>
+        <span class="icard-ico">🌍</span>
+        <h3 class="icard-title" data-i18n="ic5_title">Societal Impact</h3>
+        <p class="icard-desc" data-i18n="ic5_desc">AI is reshaping work, relationships, creativity, and power. Children explore who benefits, who's harmed, and how we design AI that serves everyone.</p>
+        <div class="icard-act" data-i18n="ic5_act">→ Activity: Future City Workshop</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ACTIVITIES ═══════════ -->
+<section class="activities" id="activities">
+  <div class="act-inner">
+    <div class="act-hd">
+      <div>
+        <div class="label" data-i18n="act_label">Explorations</div>
+        <h2 class="h2" data-i18n="act_h2">Hands-on explorations</h2>
+      </div>
+      <p class="act-note" data-i18n="act_note">Designed for ages 6–12. In-person workshops available.</p>
+    </div>
+
+    <div class="act-grid">
+      <div class="ac ac-wide">
+        <span class="ac-soon" data-i18n="ac_soon">Coming Soon</span>
+        <span class="ac-itag at-blue" data-i18n="act1_itag">Big Idea 1: Perception</span>
+        <h3 class="ac-title" data-i18n="act1_title">AI Portrait Lab</h3>
+        <p class="ac-desc" data-i18n="act1_desc">Children draw self-portraits and then explore how AI facial recognition works — and fails. We compare how humans recognize faces versus how machines do it, uncovering how design choices lead to bias and whose faces get left out.</p>
+        <p class="ac-skill" data-i18n="act1_skill"><strong>Human skill developed:</strong> Empathy &amp; Perspective-Taking</p>
+      </div>
+
+      <div class="ac">
+        <span class="ac-soon" data-i18n="ac_soon">Coming Soon</span>
+        <span class="ac-itag at-purple" data-i18n="act2_itag">Big Idea 2: Reasoning</span>
+        <h3 class="ac-title" data-i18n="act2_title">Story Maps &amp; Logic Trees</h3>
+        <p class="ac-desc" data-i18n="act2_desc">Kids create visual decision maps for stories — then discover how AI makes surprisingly similar choices. Part art project, part logic puzzle.</p>
+        <p class="ac-skill" data-i18n="act2_skill"><strong>Human skill developed:</strong> Systems Thinking</p>
+      </div>
+
+      <div class="ac">
+        <span class="ac-soon" data-i18n="ac_soon">Coming Soon</span>
+        <span class="ac-itag at-green" data-i18n="act3_itag">Big Idea 3: Learning</span>
+        <h3 class="ac-title" data-i18n="act3_title">Pattern Gardens</h3>
+        <p class="ac-desc" data-i18n="act3_desc">Create a "training dataset" of drawings, then teach a simple sorting game using patterns. Discover what happens when training data is incomplete or biased.</p>
+        <p class="ac-skill" data-i18n="act3_skill"><strong>Human skill developed:</strong> Critical Inquiry</p>
+      </div>
+
+      <div class="ac">
+        <span class="ac-soon" data-i18n="ac_soon">Coming Soon</span>
+        <span class="ac-itag at-orange" data-i18n="act4_itag">Big Idea 4: Interaction</span>
+        <h3 class="ac-title" data-i18n="act4_title">Robot Theater</h3>
+        <p class="ac-desc" data-i18n="act4_desc">Children act out conversations with imaginary AI characters — exploring how voice assistants work, what they truly understand, and where they hilariously fail.</p>
+        <p class="ac-skill" data-i18n="act4_skill"><strong>Human skill developed:</strong> Communication &amp; Nuance</p>
+      </div>
+
+      <div class="ac ac-wide">
+        <span class="ac-soon" data-i18n="ac_soon">Coming Soon</span>
+        <span class="ac-itag at-pink" data-i18n="act5_itag">Big Idea 5: Societal Impact</span>
+        <h3 class="ac-title" data-i18n="act5_title">Future City Workshop</h3>
+        <p class="ac-desc" data-i18n="act5_desc">Teams design a city of the future powered by AI — but first, they must agree on ethical rules together. Who gets to use the technology? What happens when it fails? Who is left out? This collaborative art + design project brings ethics to life through building and negotiation.</p>
+        <p class="ac-skill" data-i18n="act5_skill"><strong>Human skill developed:</strong> Ethical Reasoning &amp; Civic Imagination</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOR PARENTS ═══════════ -->
+<section class="parents" id="parents">
+  <div class="parents-grid">
+
+    <div class="parents-visual">
+      <div class="parents-bg-n">?</div>
+      <div>
+        <p class="parents-quotes-label" data-i18n="parents_quotes_h">Things I hear from parents &amp; caregivers</p>
+        <div class="qcard">
+          <div class="qcard-ico">🌟</div>
+          <p class="qcard-text" data-i18n="qc1">"What skills will my child need in 10 years?"<span class="qcard-attr">— mom of a 5 year old</span></p>
+        </div>
+        <div class="qcard">
+          <div class="qcard-ico">🤔</div>
+          <p class="qcard-text" data-i18n="qc2">"How do I teach AI literacy when I don't fully understand it myself?"<span class="qcard-attr">— dad of a 9 year old</span></p>
+        </div>
+        <div class="qcard">
+          <div class="qcard-ico">💡</div>
+          <p class="qcard-text" data-i18n="qc3">"I would like kids to shape technology — not just consume it."<span class="qcard-attr">— 3rd grade teacher</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="parents-copy">
+      <div class="label" data-i18n="parents_label">For Parents</div>
+      <h2 class="h2" style="margin-bottom:1.2rem;" data-i18n="parents_h2">You don't need to be a tech expert to raise one.</h2>
+      <p data-i18n="parents_p">My workshops are for every child — whether they love technology or have never thought twice about it. Through hands-on art, making, and play, AI becomes something kids can touch, laugh with, and actually understand. No gadgets required to have a great time.</p>
+
+      <ul class="benefits">
+        <li>
+          <span class="ben-ico">🎯</span>
+          <div class="ben-text" data-i18n="ben1">
+            <strong>No tech background required</strong>
+            Workshops use art, play, and storytelling — accessible for any child, regardless of prior experience with technology.
+          </div>
+        </li>
+        <li>
+          <span class="ben-ico">🧩</span>
+          <div class="ben-text" data-i18n="ben2">
+            <strong>Human + technical skills, always paired</strong>
+            Every technical concept comes alongside a core human ability — empathy, critical thinking, ethics — so children become thoughtful creators, not passive consumers.
+          </div>
+        </li>
+        <li>
+          <span class="ben-ico">🔒</span>
+          <div class="ben-text" data-i18n="ben3">
+            <strong>Safety and ethics built in from day one</strong>
+            Children learn to ask hard questions: Who benefits? Who might be harmed? How could this go wrong? These habits of mind are the best protection in an AI-shaped world.
+          </div>
+        </li>
+        <li>
+          <span class="ben-ico">🌱</span>
+          <div class="ben-text" data-i18n="ben4">
+            <strong>Future-adaptable, not future-anxious</strong>
+            The goal isn't to predict the future — it's to raise children who can navigate any future with confidence, creativity, and care.
+          </div>
+        </li>
+        <li>
+          <span class="ben-ico">🌐</span>
+          <div class="ben-text" data-i18n="ben5">
+            <strong>Available in English and Spanish</strong>
+            Workshops are offered fully in both languages — so every family can engage in the language that feels most natural to them.
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="cta" id="contact">
+  <div class="cta-inner">
+    <span class="cta-emoji">✉️</span>
+    <h2 class="cta-title" data-i18n="cta_title">Let's build something together</h2>
+    <p class="cta-sub" data-i18n="cta_sub">Whether you're a parent curious about workshops, a school interested in partnerships, or someone who believes children deserve better AI education — I'd love to connect.</p>
+    <form class="cta-form" id="cta-form" action="https://formspree.io/f/mjgakakv" method="POST">
+      <input type="email" name="email" class="cta-input" placeholder="Your email address" data-i18n-placeholder="cta_placeholder" required>
+      <button type="submit" class="btn btn-dark" data-i18n="cta_btn">Stay in Touch</button>
+    </form>
+    <div id="cta-success" style="display:none; margin-bottom:1rem;">
+      <span style="font-size:1.5rem;">🎉</span>
+      <p style="font-weight:600; margin-top:0.4rem;" data-i18n="cta_success_t">You're on the list!</p>
+      <p style="font-size:0.85rem; color:var(--gray);" data-i18n="cta_success_s">I'll be in touch when workshops open up.</p>
+    </div>
+    <p class="cta-privacy" data-i18n="cta_privacy">No spam, ever. Just updates on workshops, activities, and ideas.</p>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="footer-row">
+    <div>
+      <div class="footer-brand">Sonia Sierra</div>
+      <p class="footer-mission" data-i18n="footer_mission">Teaching tomorrow's minds to think critically, create boldly, and care deeply — one workshop at a time.</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#about" data-i18n="nav_about">About</a></li>
+      <li><a href="#approach" data-i18n="nav_approach">Approach</a></li>
+      <li><a href="#big-ideas" data-i18n="nav_bigideas">Big Ideas</a></li>
+      <li><a href="#activities" data-i18n="nav_activities">Explorations</a></li>
+      <li><a href="#contact" data-i18n="footer_nav_contact">Contact</a></li>
+    </ul>
+  </div>
+  <p class="footer-copy" data-i18n="footer_copy">
+    © 2026 Sonia Sierra. All rights reserved.
+    Inspired by <a href="https://ai4k12.org" target="_blank">AI4K12</a> and <a href="https://pk12.mit.edu" target="_blank">MIT pK-12</a>.
+  </p>
+</footer>
+
+<script>
+  // ── i18n ────────────────────────────────────────────────────────────────
+  const T = {
+    en: {
+      page_title:    'Sonia Sierra',
+      nav_about:     'About',
+      nav_approach:  'Approach',
+      nav_bigideas:  'Big Ideas',
+      nav_activities:'Explorations',
+      nav_parents:   'For Families',
+      nav_cta:       "Let's Connect",
+      footer_nav_contact: 'Contact',
+      hero_tag:   'Art × AI Education',
+      hero_h1:    'Where <em>creativity</em> meets the future of AI literacy',
+      hero_sub:   'Helping parents and children explore artificial intelligence through art, play, and critical thinking — building the human skills no algorithm can replace.',
+      hero_btn1:  'Explore the 5 Big Ideas ↓',
+      hero_btn2:  'About Me',
+      hero_stat1_l: 'Years in design',
+      hero_stat2_l: 'Years in AI &amp; data',
+      hero_stat3_l: 'Advanced degrees',
+      hc1_label: 'Workshop Focus',        hc1_val: 'Creative Problem Solving',
+      hc2_label: 'Big Idea 5',            hc2_val: 'AI + Societal Impact',
+      hc3_label: 'Ages',                  hc3_val: '6 – 12 Years',
+      mission_q:  '"I don\'t know what skills children will need in 10 years — but I know they\'ll need to be <em>adaptable, creative, and deeply human</em> in how they think about the world AI is building."',
+      mission_by: '— Sonia Sierra, Designer &amp; Educator',
+      about_label: 'About Me',
+      about_h2:   'Designing human experiences<br>for an AI world',
+      about_bio1: 'I\'m a designer with 15 years of experience making complex ideas feel human. For the past 7 years I\'ve focused on AI and data experiences at companies like Capital One — translating cutting-edge technology into products people actually understand and trust.',
+      about_bio2: 'But my deepest work has always been about people. The children growing up today will inherit a world shaped by AI — and they deserve to grow up understanding it, questioning it, and shaping it themselves.',
+      about_bio3: 'I combine my design expertise with my background in arts education to create workshops where creativity is the gateway to AI literacy, ethical reasoning, and future-ready thinking.',
+      hl1_t: '<strong>Futures Thinking &amp; Strategic Foresight</strong> I apply methodologies from strategic foresight to teaching — helping kids explore not just what AI is today, but what it could mean for all of us tomorrow.',
+      hl2_t: '<strong>MIT pK-12 Inspired Curriculum</strong> My approach draws from MIT\'s initiative to empower the next generation — pairing every technical concept with a core human skill, so children grow as thinkers and makers.',
+      creds_title: 'Education &amp; Credentials',
+      cred1_deg: 'MBA — Design Strategy',           cred1_sch: 'California College of the Arts',
+      cred2_deg: 'MFA — Interdisciplinary Arts Education',
+                                                   cred2_sch: 'University of Barcelona',
+      cred3_deg: 'Bachelor of Fine Arts',           cred3_sch: 'University of Barcelona',
+      cred4_deg: 'Teaching Certificate — Experimental Arts &amp; Visual Education',
+                                                   cred4_sch: 'Certified Educator',
+      exp1_l: 'Years in Design',  exp2_l: 'Years AI &amp; Data',
+      approach_label: 'My Approach',
+      approach_h2: 'Human skills first.<br>Technology second.',
+      approach_p:  'For every technical AI concept we explore, we anchor it in a core human ability — because the most powerful intelligence will always be deeply, irreducibly human.',
+      acard1_title: 'Futures Thinking',
+      acard1_text:  'Kids learn to imagine multiple possible futures, question assumptions, and understand how today\'s technology shapes tomorrow\'s world. Rooted in strategic foresight methodologies.',
+      acard1_tag:   'Strategic Foresight',
+      acard2_title: 'Art as a Thinking Tool',
+      acard2_text:  'Drawing, making, and creating aren\'t just fun — they\'re how children externalize complex thinking. Art becomes a medium for exploring how AI perceives, reasons, and learns.',
+      acard2_tag:   'Creative Pedagogy',
+      acard3_title: 'Ethics from the Start',
+      acard3_text:  'We don\'t bolt ethics on at the end — it\'s woven into everything. Children discover ethical design principles by grappling with real questions about fairness, bias, and impact.',
+      acard3_tag:   'Ethical Design',
+      inspired_text: '<strong>Inspired by leading AI education initiatives:</strong>',
+      bi_label: 'The Framework',
+      bi_h2:    'The 5 Big Ideas in AI',
+      bi_p:     'Drawn from the <a href="https://ai4k12.org/" target="_blank" style="color:var(--purple);font-weight:600;">AI4K12 initiative</a>, these five ideas form the backbone of every workshop — each opening a door to both technical understanding and human wisdom.',
+      ic1_title: 'Perception',
+      ic1_desc:  'How do computers sense and understand the world? Cameras, microphones, sensors — and why machines often "see" very differently than humans do.',
+      ic1_act:   '→ Activity: AI Portrait Lab',
+      ic2_title: 'Representation &amp; Reasoning',
+      ic2_desc:  'How do machines represent knowledge and make decisions? We explore logic, data structures, and the surprising ways computers "think."',
+      ic2_act:   '→ Activity: Story Maps',
+      ic3_title: 'Learning',
+      ic3_desc:  'Computers can learn from experience — but only from the data we give them. What does it mean to teach a machine? What can go wrong?',
+      ic3_act:   '→ Activity: Pattern Gardens',
+      ic4_title: 'Natural Interaction',
+      ic4_desc:  'How do we communicate with computers through voice, gesture, and language? And what gets lost in translation between humans and machines?',
+      ic4_act:   '→ Activity: Robot Theater',
+      ic5_title: 'Societal Impact',
+      ic5_desc:  'AI is reshaping work, relationships, creativity, and power. Children explore who benefits, who\'s harmed, and how we design AI that serves everyone.',
+      ic5_act:   '→ Activity: Future City Workshop',
+      act_label: 'Explorations',
+      act_h2:   'Hands-on explorations',
+      act_note:  'Designed for ages 6–12. In-person workshops available.',
+      ac_soon:   'Coming Soon',
+      act1_itag: 'Big Idea 1: Perception',
+      act1_title: 'AI Portrait Lab',
+      act1_desc:  'Children draw self-portraits and then explore how AI facial recognition works — and fails. We compare how humans recognize faces versus how machines do it, uncovering how design choices lead to bias and whose faces get left out.',
+      act1_skill: '<strong>Human skill developed:</strong> Empathy &amp; Perspective-Taking',
+      act2_itag: 'Big Idea 2: Reasoning',
+      act2_title: 'Story Maps &amp; Logic Trees',
+      act2_desc:  'Kids create visual decision maps for stories — then discover how AI makes surprisingly similar choices. Part art project, part logic puzzle.',
+      act2_skill: '<strong>Human skill developed:</strong> Systems Thinking',
+      act3_itag: 'Big Idea 3: Learning',
+      act3_title: 'Pattern Gardens',
+      act3_desc:  'Create a "training dataset" of drawings, then teach a simple sorting game using patterns. Discover what happens when training data is incomplete or biased.',
+      act3_skill: '<strong>Human skill developed:</strong> Critical Inquiry',
+      act4_itag: 'Big Idea 4: Interaction',
+      act4_title: 'Robot Theater',
+      act4_desc:  'Children act out conversations with imaginary AI characters — exploring how voice assistants work, what they truly understand, and where they hilariously fail.',
+      act4_skill: '<strong>Human skill developed:</strong> Communication &amp; Nuance',
+      act5_itag: 'Big Idea 5: Societal Impact',
+      act5_title: 'Future City Workshop',
+      act5_desc:  'Teams design a city of the future powered by AI — but first, they must agree on ethical rules together. Who gets to use the technology? What happens when it fails? Who is left out? This collaborative art + design project brings ethics to life through building and negotiation.',
+      act5_skill: '<strong>Human skill developed:</strong> Ethical Reasoning &amp; Civic Imagination',
+      qc1: '"What skills will my child need in 10 years?"<span class="qcard-attr">— mom of a 5 year old</span>',
+      qc2: '"How do I teach AI literacy when I don\'t fully understand it myself?"<span class="qcard-attr">— dad of a 9 year old</span>',
+      qc3: '"I would like kids to shape technology — not just consume it."<span class="qcard-attr">— 3rd grade teacher</span>',
+      parents_quotes_h: 'Things I hear from parents &amp; caregivers',
+      parents_label: 'For Parents',
+      parents_h2: 'You don\'t need to be a tech expert to raise one.',
+      parents_p:  'My workshops are for every child — whether they love technology or have never thought twice about it. Through hands-on art, making, and play, AI becomes something kids can touch, laugh with, and actually understand. No gadgets required to have a great time.',
+      ben1: '<strong>No tech background required</strong> Workshops use art, play, and storytelling — accessible for any child, regardless of prior experience with technology.',
+      ben2: '<strong>Human + technical skills, always paired</strong> Every technical concept comes alongside a core human ability — empathy, critical thinking, ethics — so children become thoughtful creators, not passive consumers.',
+      ben3: '<strong>Safety and ethics built in from day one</strong> Children learn to ask hard questions: Who benefits? Who might be harmed? How could this go wrong? These habits of mind are the best protection in an AI-shaped world.',
+      ben4: '<strong>Future-adaptable, not future-anxious</strong> The goal isn\'t to predict the future — it\'s to raise children who can navigate any future with confidence, creativity, and care.',
+      ben5: '<strong>Available in English and Spanish</strong> Workshops are offered fully in both languages — so every family can engage in the language that feels most natural to them.',
+      cta_title:   "Let's build something together",
+      cta_sub:     'Whether you\'re a parent curious about workshops, a school interested in partnerships, or someone who believes children deserve better AI education — I\'d love to connect.',
+      cta_btn:     'Stay in Touch',
+      cta_privacy: 'No spam, ever. Just updates on workshops, activities, and ideas.',
+      cta_placeholder: 'Your email address',
+      cta_success_t: 'You\'re on the list!',
+      cta_success_s: 'I\'ll be in touch when workshops open up.',
+      footer_mission: 'Teaching tomorrow\'s minds to think critically, create boldly, and care deeply — one workshop at a time.',
+      footer_copy: '© 2026 Sonia Sierra. All rights reserved. Inspired by <a href="https://ai4k12.org" target="_blank">AI4K12</a> and <a href="https://pk12.mit.edu" target="_blank">MIT pK-12</a>.'
+    },
+    es: {
+      page_title:    'Sonia Sierra',
+      nav_about:     'Sobre mí',
+      nav_approach:  'Enfoque',
+      nav_bigideas:  'Grandes Ideas',
+      nav_activities:'Exploraciones',
+      nav_parents:   'Para Familias',
+      nav_cta:       'Conectémonos',
+      footer_nav_contact: 'Contacto',
+      hero_tag:   'Arte × Educación en IA',
+      hero_h1:    'Donde la <em>creatividad</em> se encuentra con la alfabetización en IA',
+      hero_sub:   'Ayudando a padres e hijos a explorar la inteligencia artificial a través del arte, el juego y el pensamiento crítico — desarrollando las habilidades humanas que ningún algoritmo puede reemplazar.',
+      hero_btn1:  'Explora las 5 Grandes Ideas ↓',
+      hero_btn2:  'Sobre mí',
+      hero_stat1_l: 'Años en diseño',
+      hero_stat2_l: 'Años en IA y datos',
+      hero_stat3_l: 'Titulaciones avanzadas',
+      hc1_label: 'Enfoque del Taller',       hc1_val: 'Resolución Creativa de Problemas',
+      hc2_label: 'Gran Idea 5',              hc2_val: 'IA + Impacto Social',
+      hc3_label: 'Edades',                   hc3_val: '6 – 12 años',
+      mission_q:  '«No sé qué habilidades necesitarán los niños y niñas en 10 años — pero sé que deberán ser <em>adaptables, creativos e inconfundiblemente humanos</em> en cómo piensan sobre el mundo que la IA está construyendo.»',
+      mission_by: '— Sonia Sierra, Diseñadora y Educadora',
+      about_label: 'Sobre mí',
+      about_h2:   'Diseñando experiencias humanas<br>para un mundo de IA',
+      about_bio1: 'Soy diseñadora con 15 años de experiencia haciendo que las ideas complejas se sientan humanas. Durante los últimos 7 años me he enfocado en experiencias de IA y datos en empresas como Capital One — traduciendo tecnología puntera en productos que la gente realmente entiende y en los que confía.',
+      about_bio2: 'Pero mi trabajo más profundo siempre ha sido sobre las personas. Los niños y niñas que crecen hoy heredarán un mundo moldeado por la IA — y merecen crecer entendiéndola, cuestionándola y dándole forma ellos mismos.',
+      about_bio3: 'Combino mi experiencia en diseño con mi formación en educación artística para crear talleres donde la creatividad es la puerta de entrada a la alfabetización en IA, el razonamiento ético y el pensamiento preparado para el futuro.',
+      hl1_t: '<strong>Pensamiento de Futuros y Prospectiva Estratégica</strong> Aplico metodologías de prospectiva estratégica a la enseñanza — ayudando a los niños y niñas a explorar no solo qué es la IA hoy, sino qué podría significar para todos nosotros mañana.',
+      hl2_t: '<strong>Currículo Inspirado en MIT pK-12</strong> Mi enfoque se nutre de la iniciativa del MIT para empoderar a la próxima generación — vinculando cada concepto técnico con una habilidad humana esencial, para que los niños y niñas crezcan como pensadores y creadores.',
+      creds_title: 'Formación y Credenciales',
+      cred1_deg: 'MBA — Estrategia de Diseño',      cred1_sch: 'California College of the Arts',
+      cred2_deg: 'MFA — Educación Artística Interdisciplinar',
+                                                   cred2_sch: 'Universidad de Barcelona',
+      cred3_deg: 'Grado en Bellas Artes (BFA)',    cred3_sch: 'Universidad de Barcelona',
+      cred4_deg: 'Certificado de Docencia — Artes Experimentales y Educación Visual',
+                                                   cred4_sch: 'Educadora Certificada',
+      exp1_l: 'Años en Diseño',  exp2_l: 'Años en IA y Datos',
+      approach_label: 'Mi Enfoque',
+      approach_h2: 'Las habilidades humanas primero.<br>La tecnología, después.',
+      approach_p:  'Por cada concepto técnico de IA que exploramos, lo anclamos en una capacidad humana esencial — porque la inteligencia más poderosa siempre será profunda e irreduciblemente humana.',
+      acard1_title: 'Pensamiento de Futuros',
+      acard1_text:  'Los niños y niñas aprenden a imaginar múltiples futuros posibles, a cuestionar suposiciones y a entender cómo la tecnología actual moldea el mundo del mañana. Basado en metodologías de prospectiva estratégica.',
+      acard1_tag:   'Prospectiva Estratégica',
+      acard2_title: 'El Arte como Herramienta de Pensamiento',
+      acard2_text:  'Dibujar, crear y hacer no son solo divertidos — son la forma en que los niños y niñas exteriorizan el pensamiento complejo. El arte se convierte en un medio para explorar cómo la IA percibe, razona y aprende.',
+      acard2_tag:   'Pedagogía Creativa',
+      acard3_title: 'Ética desde el Principio',
+      acard3_text:  'No añadimos la ética al final — está entretejida en todo. Los niños y niñas descubren principios de diseño ético al enfrentarse a preguntas reales sobre equidad, sesgo e impacto.',
+      acard3_tag:   'Diseño Ético',
+      inspired_text: '<strong>Inspirado en las principales iniciativas de educación en IA:</strong>',
+      bi_label: 'El Marco',
+      bi_h2:    'Las 5 Grandes Ideas de la IA',
+      bi_p:     'Extraídas de la <a href="https://ai4k12.org/" target="_blank" style="color:var(--purple);font-weight:600;">iniciativa AI4K12</a>, estas cinco ideas forman la columna vertebral de cada taller — cada una abre una puerta tanto a la comprensión técnica como a la sabiduría humana.',
+      ic1_title: 'Percepción',
+      ic1_desc:  '¿Cómo perciben y entienden el mundo los ordenadores? Cámaras, micrófonos, sensores — y por qué las máquinas a menudo «ven» de forma muy diferente a los humanos.',
+      ic1_act:   '→ Actividad: Laboratorio de Retratos IA',
+      ic2_title: 'Representación y Razonamiento',
+      ic2_desc:  '¿Cómo representan el conocimiento y toman decisiones las máquinas? Exploramos la lógica, las estructuras de datos y las sorprendentes formas en que los ordenadores «piensan».',
+      ic2_act:   '→ Actividad: Mapas de Historia',
+      ic3_title: 'Aprendizaje',
+      ic3_desc:  'Los ordenadores pueden aprender de la experiencia — pero solo de los datos que les damos. ¿Qué significa enseñar a una máquina? ¿Qué puede salir mal?',
+      ic3_act:   '→ Actividad: Jardines de Patrones',
+      ic4_title: 'Interacción Natural',
+      ic4_desc:  '¿Cómo nos comunicamos con los ordenadores mediante voz, gestos y lenguaje? ¿Y qué se pierde en la traducción entre humanos y máquinas?',
+      ic4_act:   '→ Actividad: Teatro Robótico',
+      ic5_title: 'Impacto Social',
+      ic5_desc:  'La IA está transformando el trabajo, las relaciones, la creatividad y el poder. Los niños y niñas exploran quién se beneficia, quién se ve perjudicado y cómo diseñar una IA que sirva a todos.',
+      ic5_act:   '→ Actividad: Taller Ciudad del Futuro',
+      act_label: 'Exploraciones',
+      act_h2:   'Exploraciones prácticas',
+      act_note:  'Diseñadas para edades 6–12. Talleres presenciales disponibles.',
+      ac_soon:   'Próximamente',
+      act1_itag: 'Gran Idea 1: Percepción',
+      act1_title: 'Laboratorio de Retratos IA',
+      act1_desc:  'Los niños y niñas hacen autorretratos y luego exploran cómo funciona —y falla— el reconocimiento facial de la IA. Comparamos cómo los humanos reconocen caras frente a cómo lo hacen las máquinas, descubriendo cómo las decisiones de diseño generan sesgos y qué caras quedan fuera.',
+      act1_skill: '<strong>Habilidad humana desarrollada:</strong> Empatía y Toma de Perspectiva',
+      act2_itag: 'Gran Idea 2: Razonamiento',
+      act2_title: 'Mapas de Historia y Árboles Lógicos',
+      act2_desc:  'Los niños y niñas crean mapas de decisión visuales para historias — y luego descubren cómo la IA toma decisiones sorprendentemente similares. Parte proyecto artístico, parte puzle lógico.',
+      act2_skill: '<strong>Habilidad humana desarrollada:</strong> Pensamiento Sistémico',
+      act3_itag: 'Gran Idea 3: Aprendizaje',
+      act3_title: 'Jardines de Patrones',
+      act3_desc:  'Crea un «conjunto de entrenamiento» de dibujos y luego enseña un sencillo juego de clasificación usando patrones. Descubre qué ocurre cuando los datos de entrenamiento son incompletos o sesgados.',
+      act3_skill: '<strong>Habilidad humana desarrollada:</strong> Indagación Crítica',
+      act4_itag: 'Gran Idea 4: Interacción',
+      act4_title: 'Teatro Robótico',
+      act4_desc:  'Los niños y niñas representan conversaciones con personajes de IA imaginarios — explorando cómo funcionan los asistentes de voz, qué entienden realmente y dónde fallan de forma hilarante.',
+      act4_skill: '<strong>Habilidad humana desarrollada:</strong> Comunicación y Matices',
+      act5_itag: 'Gran Idea 5: Impacto Social',
+      act5_title: 'Taller Ciudad del Futuro',
+      act5_desc:  'Los equipos diseñan una ciudad del futuro impulsada por IA — pero primero deben ponerse de acuerdo en normas éticas. ¿Quién puede usar la tecnología? ¿Qué ocurre cuando falla? ¿Quién queda excluido? Este proyecto colaborativo de arte y diseño da vida a la ética a través de la construcción y la negociación.',
+      act5_skill: '<strong>Habilidad humana desarrollada:</strong> Razonamiento Ético e Imaginación Cívica',
+      qc1: '«¿Qué habilidades necesitará mi hijo dentro de 10 años?»<span class="qcard-attr">— mamá de un niño de 5 años</span>',
+      qc2: '«¿Cómo enseño alfabetización en IA cuando yo mismo no la entiendo del todo?»<span class="qcard-attr">— papá de un niño de 9 años</span>',
+      qc3: '«Me gustaría que los niños y niñas dieran forma a la tecnología — no que simplemente la consumieran.»<span class="qcard-attr">— maestra de 3er grado</span>',
+      parents_quotes_h: 'Lo que escucho de padres y cuidadores',
+      parents_label: 'Para Familias',
+      parents_h2: 'No hace falta ser experto en tecnología para criar a uno.',
+      parents_p:  'Mis talleres son para todos los niños y niñas — tanto si les encanta la tecnología como si nunca han pensado en ella. A través del arte, la creación y el juego, la IA se convierte en algo que los niños y niñas pueden tocar, disfrutar y entender de verdad. No hacen falta gadgets para pasarlo bien.',
+      ben1: '<strong>Sin conocimientos tecnológicos previos</strong> Los talleres usan arte, juego y narración de historias — accesibles para cualquier niño, independientemente de su experiencia previa con la tecnología.',
+      ben2: '<strong>Habilidades humanas y técnicas, siempre juntas</strong> Cada concepto técnico va acompañado de una habilidad humana esencial — empatía, pensamiento crítico, ética — para que los niños y niñas se conviertan en creadores reflexivos, no en consumidores pasivos.',
+      ben3: '<strong>Seguridad y ética desde el primer día</strong> Los niños y niñas aprenden a hacerse preguntas difíciles: ¿Quién se beneficia? ¿Quién podría verse perjudicado? ¿Cómo podría salir mal? Estos hábitos de pensamiento son la mejor protección en un mundo moldeado por la IA.',
+      ben4: '<strong>Adaptados al futuro, no ansiosos por él</strong> El objetivo no es predecir el futuro — es criar niños y niñas que puedan navegar cualquier futuro con confianza, creatividad y cuidado.',
+      ben5: '<strong>Disponible en inglés y español</strong> Los talleres se ofrecen íntegramente en ambos idiomas — para que cada familia pueda participar en el idioma que le resulte más natural.',
+      cta_title:   'Construyamos algo juntos',
+      cta_sub:     'Tanto si eres un padre o madre curioso sobre los talleres, una escuela interesada en colaboraciones, o alguien que cree que los niños y niñas merecen una mejor educación en IA — me encantaría conectar.',
+      cta_btn:     'Mantente en Contacto',
+      cta_privacy: 'Sin spam, nunca. Solo actualizaciones sobre talleres, actividades e ideas.',
+      cta_placeholder: 'Tu dirección de correo electrónico',
+      cta_success_t: '¡Ya estás en la lista!',
+      cta_success_s: 'Me pondré en contacto cuando abran los talleres.',
+      footer_mission: 'Enseñando a las mentes del mañana a pensar críticamente, crear con audacia y cuidar profundamente — un taller a la vez.',
+      footer_copy: '© 2026 Sonia Sierra. Todos los derechos reservados. Inspirada en <a href="https://ai4k12.org" target="_blank">AI4K12</a> y <a href="https://pk12.mit.edu" target="_blank">MIT pK-12</a>.'
+    }
+  };
+
+  function setLang(lang) {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const v = T[lang][el.dataset.i18n];
+      if (v !== undefined) el.innerHTML = v;
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const v = T[lang][el.dataset.i18nPlaceholder];
+      if (v !== undefined) el.placeholder = v;
+    });
+    document.documentElement.lang = lang;
+    document.title = T[lang].page_title;
+    localStorage.setItem('lang', lang);
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+  }
+
+  // Init: URL param → localStorage → default en
+  (function () {
+    const p = new URLSearchParams(window.location.search).get('lang');
+    const s = localStorage.getItem('lang');
+    const lang = (p === 'en' || p === 'es') ? p : (s === 'es' ? 'es' : 'en');
+    if (lang !== 'en') setLang(lang);
+  }());
+
+  // ── Formspree AJAX submit ────────────────────────────────────────────────
+  document.getElementById('cta-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = '…';
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('cta-success').style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Try again';
+      }
+    } catch {
+      btn.disabled = false;
+      btn.textContent = 'Try again';
+    }
+  });
+
+  // ── Nav scroll effect ────────────────────────────────────────────────────
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('stuck', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── Fade-in on scroll ────────────────────────────────────────────────────
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }),
+    { threshold: 0, rootMargin: '0px 0px -60px 0px' }
+  );
+  document.querySelectorAll('.fi').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
